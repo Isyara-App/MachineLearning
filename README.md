@@ -1,17 +1,16 @@
 # Machine Learning Information
 
-# Indonesian Sign Language Detection (Bisindo)
-
-## Dataset Source
+## Indonesian Sign Language Detection (BISINDO)
+### Dataset Source
 https://www.kaggle.com/datasets/agungmrf/indonesian-sign-language-bisindo
 
-## About the model
+### About the model
 
-## Approach used
-#### 1. Convolutional Neural Network (CNN) : A custom model built from scratch to classify 26 BISINDO alphabet classes.
-#### 2. Transfer Learning with MobileNetV2 : A pretrained model fine-tuned for BISINDO alphabet classification.
+### Approach used
+##### 1. Convolutional Neural Network (CNN) : A custom model built from scratch to classify 26 BISINDO alphabet classes.
+##### 2. Transfer Learning with MobileNetV2 : A pretrained model fine-tuned for BISINDO alphabet classification.
 
-## Team Responsibilities
+### Team Responsibilities
 | Task	| Responsibilityy |
 | ------------- |------------- |
 | Data Preparation | Collect and preprocess datasets for image classification | 
@@ -20,7 +19,7 @@ https://www.kaggle.com/datasets/agungmrf/indonesian-sign-language-bisindo
 | Integration | Save models and prepare for deployment in formats like .h5 or TFLite. | 
 
 
-## Steps in Implementation
+### Steps in Implementation
 1. Dataset Preparation:
    - Downloaded dataset from Kaggle.
    - Organized data into training, validation, and test sets.
@@ -45,16 +44,15 @@ https://www.kaggle.com/datasets/agungmrf/indonesian-sign-language-bisindo
 6. Model Saving:
    - Saved models in H5 and TFLite formats for further use and deployment.
 
-## Results and Comparison
+### Results and Comparison
 | Model	| Training Accuracy |	Validation Accuracy |	Test Accuracy |
 | ------------- |------------- | ------------- | ------------- |
 | CNN 5 Layers	| 97% | 94% |	94% |
 | Transfer Learning	| 99% |	95% |	96% |
 
-## Installation Guide
-#### Image Recognition
+### Installation Guide
 
-## Members
+### Members
 | Name | ID Bangkit | University |
 | ------------- |------------- | ------------- |
 | Aldi Musneldi  | M497B4KY0328	  | Universitas Putra Indonesia Yptk Padang  |
