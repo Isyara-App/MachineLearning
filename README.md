@@ -5,7 +5,7 @@
 https://www.kaggle.com/datasets/agungmrf/indonesian-sign-language-bisindo
 
 ### About the model
-The BISINDO Sign Language Detection is build using a CNN architecture for object recognition, in this case it is used to recognize hand gestures from images to be classified into 26 alphabet classes. The models has been trained, tested, and saved in formats compatible with deployment, including TensorFlow Lite (TFLite) for integration into Android applications.
+The BISINDO Sign Language Detection is build using a CNN architecture for object recognition, in this case it is used to recognize hand gestures from images to be classified into 26 alphabet classes. The model mostly consist of fully connected convolutional layers which will learn from the provided dataset to find the patterns in hand gestures for each alphabets. The models has been trained, tested, and saved in formats compatible with deployment, including TensorFlow Lite (TFLite) for integration into Android applications.
 
 ### Approach used
 ##### 1. Convolutional Neural Network (CNN) : A custom model built from scratch to classify 26 BISINDO alphabet classes.
@@ -60,16 +60,16 @@ The BISINDO Sign Language Detection is build using a CNN architecture for object
 #### <ins>Set Up</ins>
 1. Clone the repository
    ```
-   git clone https://github.com/Isyara-App/MachineLearning
+   !git clone https://github.com/Isyara-App/MachineLearning
    ```
 2. Install Dependencies
    - **CNN**:
       ```
-      pip install -r MachineLearning/BuildAndTrainModel/CNN/requirements.txt
+      !pip install -r MachineLearning/BuildAndTrainModel/CNN/requirements.txt
       ```
    - **Transfer Learning**:
       ```
-      pip install -r MachineLearning/BuildAndTrainModel/TransferLearning/requirements.txt
+      !pip install -r MachineLearning/BuildAndTrainModel/TransferLearning/requirements.txt
       ```
 3. Use Models
    
@@ -77,7 +77,7 @@ The BISINDO Sign Language Detection is build using a CNN architecture for object
    - **CNN**: `BuildAndTrainModel/CNN/models/`
    - **Transfer Learning**: `BuildAndTrainModel/TransferLearning/savedModels/`
    
-   The models format saved as: `.h5`, `.keras`, `.tflite`
+   The models format saved as: `.h5` and `.tflite` (including its metadata)
 4. Load Models
    - **For .h5 models**:
      
@@ -89,6 +89,8 @@ The BISINDO Sign Language Detection is build using a CNN architecture for object
        ```
      - **Transfer Learning**:
        ```
+       import sys
+       sys.path.append('/content/MachineLearning/BuildAndTrainModel/TransferLearning') # Replace path accordingly
        from keras.models import load_model
        from custom_layers import PreprocessingLayer
 
@@ -122,9 +124,79 @@ The BISINDO Sign Language Detection is build using a CNN architecture for object
           print("Inputs:", input_details)
           print("Outputs:", output_details)
           ```
-5. TBC
-   
-   
+5. Load and Preprocess Image
+
+   Before making the prediction, the image need to be uploaded and processed first to match the model expected input size.
+   - **For .h5 models**:
+     
+     - **CNN**:
+       ```
+       import cv2
+       import numpy as np
+       
+       image = cv2.imread('/content/body dot (1).jpg')  # Replace with your image path
+       image = cv2.resize(image, (150, 150))
+       image = image / 255.0
+       image = np.expand_dims(image, axis=0)
+       ```
+     - **Transfer Learning**:
+       ```
+       import cv2
+       import numpy as np
+       
+       image = cv2.imread('/content/body dot (1).jpg')  # Replace with your image path
+       image = cv2.resize(image, (224, 224))
+       image = np.expand_dims(image, axis=0)
+       ```
+   - **For .tflite models**:
+        
+        - **CNN**:
+          ```
+          # Replace with image file path
+          image = tf.io.read_file('/content/body dot (1).jpg')
+          image = tf.image.decode_jpeg(image, channels=3)
+          image = tf.image.resize(image, (150, 150))
+          image = tf.cast(image, tf.float32) / 255.0 
+          image = tf.expand_dims(image, axis=0)
+          ```
+       - **Transfer Learning**:
+          ```
+          # Replace with image file path
+          image = tf.io.read_file('/content/body dot (1).jpg')
+          image = tf.image.decode_jpeg(image, channels=3)
+          image = tf.image.resize(image, (224, 224))
+          image = tf.cast(image, tf.float32)
+          image = tf.expand_dims(image, axis=0)
+          ```
+6. Predict the Image
+     - **For .h5 models**:
+       ```
+       predictions = model.predict(image)
+       predicted_class = np.argmax(predictions[0])
+       
+       # Map the labels to classes names
+       class_names = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z']
+       
+       # Show class prediction
+       print(f"Predicted class name: {class_names[predicted_class]}")
+       ```
+     - **For .tflite models**:
+       ```
+       # Set input tensor
+       interpreter.set_tensor(input_details[0]['index'], image.numpy())
+       
+       # Run interpreter
+       interpreter.invoke()
+        
+       # Get output with the highest class possibility
+       output = interpreter.get_tensor(output_details[0]['index'])
+       predicted_class = np.argmax(output)
+       
+       # labels
+       class_names = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z']
+       
+       print(f"Predicted class name: {class_names[predicted_class]}")
+       ```
 
 ### Members
 | Name | ID Bangkit | University |
