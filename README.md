@@ -83,6 +83,7 @@ The BISINDO Sign Language Detection is build using a CNN architecture for object
      
      - **CNN**:
        ```
+       import tensorflow as tf
        from keras.models import load_model
        
        model = load_model('/content/MachineLearning/BuildAndTrainModel/CNN/models/trained_model.h5') # Replace the model path
@@ -91,6 +92,7 @@ The BISINDO Sign Language Detection is build using a CNN architecture for object
        ```
        import sys
        sys.path.append('/content/MachineLearning/BuildAndTrainModel/TransferLearning') # Replace path accordingly
+       import tensorflow as tf
        from keras.models import load_model
        from custom_layers import PreprocessingLayer
 
@@ -101,6 +103,7 @@ The BISINDO Sign Language Detection is build using a CNN architecture for object
         - **CNN**:
           ```
           import tensorflow as tf
+          import numpy as np
 
           # Replace the model path
           interpreter = tf.lite.Interpreter(model_path="/content/MachineLearning/BuildAndTrainModel/CNN/models/trained_model.tflite")
@@ -114,6 +117,7 @@ The BISINDO Sign Language Detection is build using a CNN architecture for object
        - **Transfer Learning**:
           ```
           import tensorflow as tf
+          import numpy as np
 
           # Replace the model path
           interpreter = tf.lite.Interpreter(model_path="/content/MachineLearning/BuildAndTrainModel/TransferLearning/savedModels/model.tflite")
