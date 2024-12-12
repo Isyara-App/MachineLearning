@@ -51,7 +51,7 @@ The BISINDO Sign Language Detection is build using a CNN architecture for object
 | CNN 5 Layers	| 97% | 94% |	94% |
 | Transfer Learning	| 99% |	95% |	96% |
 
-### Installation Guide 
+### Model Usage 
 #### <ins>Prerequisites</ins>
 - Python 3.8 or higher
 - TensorFlow 2.x
@@ -71,6 +71,7 @@ The BISINDO Sign Language Detection is build using a CNN architecture for object
       ```
       !pip install -r MachineLearning/BuildAndTrainModel/TransferLearning/requirements.txt
       ```
+   If you want to modify the model directly, you may download any of the `.ipnyb` files and make any changes to it.
 3. Use Models
    
    The pretrained models are saved under:
